@@ -57,9 +57,9 @@ server <- function(input, output, session){
                       Gender = Sex)
       
       # generate bands
-      new_student_band <- predict(object = multinom_fit,
-                                  new_data = new_data,
-                                  type = "class")$.pred_class
+      new_student_band <- parsnip::predict.model_fit(object = multinom_fit,
+                                                     new_data = new_data,
+                                                     type = "class")$.pred_class
 
       
       # render data into a table
