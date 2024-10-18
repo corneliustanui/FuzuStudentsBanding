@@ -1,16 +1,16 @@
+# load UI globals
+source("./mains/globals.R") 
 
 # define UI elements
-
 ui <- fluidPage(
   
-  # application title
+  # app title
   titlePanel(title = div(icon("graduation-cap"), 
                          strong("Fuzu Students Banding"), 
                          style = "font-family: Cursive; font-size:24.5px")),
   
+  # sidebar with inputs
   sidebarLayout(
-    
-    # sidebar with a slider input
     sidebarPanel = sidebarPanel(
       width = 3,
       style = "background-color:#B4CCDE",
@@ -86,14 +86,14 @@ ui <- fluidPage(
                    min = 0,
                    value = 0),
       
-      actionBttn(inputId = "generate_bands",
-                 label = "Generate Bands",
-                 icon = NULL,
-                 style = "unite",
-                 color = "primary",
-                 size = "md",
-                 block = TRUE,
-                 no_outline = FALSE)
+      shinyWidgets::actionBttn(inputId = "generate_bands",
+                               label = "Generate Bands",
+                               icon = NULL,
+                               style = "unite",
+                               color = "primary",
+                               size = "md",
+                               block = TRUE,
+                               no_outline = FALSE)
 
     ),
     
@@ -105,7 +105,6 @@ ui <- fluidPage(
       tableOutput("new_student_data"),
       
       textOutput("result")
-      
     )
   )
 )
