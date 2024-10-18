@@ -50,7 +50,7 @@ ui <- fluidPage(
                 label = "Which college/university have you been invited to?", 
                 value = "", 
                 width = NULL, 
-                placeholder = "Leave blank if none"),
+                placeholder = "Enter university name"),
       
       numericInput(inputId = "gross_monthly_family_income", 
                    label = "What is your family's gross monthly income (KES)?", 
