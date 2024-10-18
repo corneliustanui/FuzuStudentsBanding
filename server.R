@@ -1,7 +1,6 @@
 
 # define server side processing
 
-# server
 server <- function(input, output, session){
   
   # define data frame

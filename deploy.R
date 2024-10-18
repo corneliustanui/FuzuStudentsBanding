@@ -17,7 +17,7 @@ setAccountInfo(name = error_on_missing_name("SHINY_ACC_NAME"),
 
 # Deploy the application.
 deployApp(appFiles = c('./mains/',
-                       
+
                        'ui.R', 
                        'server.R',
                        'app.R'),
