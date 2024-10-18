@@ -6,19 +6,17 @@ library(shinycssloaders)
 library(shinyjs)
 library(tidyverse)
 
-source("./globals.R")
-
-# Define UI
+# define UI
 ui <- fluidPage(
   
-  # Application title
+  # application title
   titlePanel(title = div(icon("graduation-cap"), 
                          strong("Fuzu Students Banding"), 
                          style = "font-family: Cursive; font-size:24.5px")),
   
   sidebarLayout(
     
-    # Sidebar with a slider input
+    # sidebar with a slider input
     sidebarPanel = sidebarPanel(
       width = 3,
       style = "background-color:#B4CCDE",
@@ -28,7 +26,7 @@ ui <- fluidPage(
       p(style = "text-align:center",
         "Are you a university student in Kenya, and would you like to know where you lie in terms of banding for the award of Governmnet support towards your tuition and stay in school?", 
         strong("Fuzu Students Banding"), "does exacty that! Enter the details below and click", 
-        strong("Allocate Band")),
+        strong("Generate Band")),
       
       hr(style = "border-top: 1px solid #000000;"),
       
@@ -61,7 +59,7 @@ ui <- fluidPage(
                 placeholder = "Leave blank if none"),
       
       numericInput(inputId = "gross_monthly_family_income", 
-                   label = "What is your monthly gross family income (KES)?", 
+                   label = "What is your family's gross monthly income (KES)?", 
                    min = 0,
                    value = 0),
       
@@ -92,7 +90,16 @@ ui <- fluidPage(
       numericInput(inputId = "ProgramCostsKES", 
                    label = "What is the terminal total cost of the program you seek to pursue?", 
                    min = 0,
-                   value = 0)
+                   value = 0),
+      
+      actionBttn(inputId = "generate_bands",
+                 label = "Generate Bands",
+                 icon = NULL,
+                 style = "unite",
+                 color = "primary",
+                 size = "md",
+                 block = TRUE,
+                 no_outline = FALSE)
 
     ),
     
@@ -100,23 +107,10 @@ ui <- fluidPage(
     mainPanel = mainPanel(
       width = 9,
       
-      tabsetPanel(
-        tabPanel(strong("Citations"),
-                 
-                 fluidPage(
-                   column(width = 6,
-                          
-                          "table"),
-                   
-                   column(width = 6,
-                          
-                          "graph")
-                 )
-                 
-        ),
-        
-        
-        tabPanel(strong("Data")))
+      # display entered data
+      tableOutput("new_student_data"),
+      
+      textOutput("result")
       
     )
   )
