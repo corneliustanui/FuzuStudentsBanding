@@ -1,12 +1,6 @@
-# packages
-library(shiny)
-library(shinydashboard)
-library(shinyWidgets)
-library(shinycssloaders)
-library(shinyjs)
-library(tidyverse)
 
-# define UI
+# define UI elements
+
 ui <- fluidPage(
   
   # application title
