@@ -1,6 +1,7 @@
+# load engine
+multinom_fit <- readRDS("./mains/multinomial_regression_classifier.rds")
 
 # define server side processing
-
 server <- function(input, output, session){
   
   # define data frame
@@ -46,14 +47,14 @@ server <- function(input, output, session){
       # select relevant columns 
       
       new_data <- new_student_data() |>
-        select(GrossFamilyIncome = FamilyIncome,
-               GeographicalLocation = County,
-               PovertyProbabilityIndex = PovertyProbabilityIndex,
-               Orphans = OrphanStatus,
-               Disability = PwldStatus,
-               NumberOfDependents = NumberOfDependents,
-               ProgramCostsKES = ProgramCostsKES,
-               Gender = Sex)
+        dplyr::select(GrossFamilyIncome = FamilyIncome,
+                      GeographicalLocation = County,
+                      PovertyProbabilityIndex = PovertyProbabilityIndex,
+                      Orphans = OrphanStatus,
+                      Disability = PwldStatus,
+                      NumberOfDependents = NumberOfDependents,
+                      ProgramCostsKES = ProgramCostsKES,
+                      Gender = Sex)
       
       # generate bands
       new_student_band <- predict(object = multinom_fit,
