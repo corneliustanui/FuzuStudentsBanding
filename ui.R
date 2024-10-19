@@ -1,6 +1,5 @@
 # load UI globals
 source("./mains/globals.R") 
-more_info <- "This is machine learning application powered by a multinomial regression. The training data was simulated, and as such the outcome does not reflect the reality. © 2024 Cornelius Tanui"
 
 # define UI elements
 ui <- fluidPage(
@@ -8,21 +7,8 @@ ui <- fluidPage(
   # app title
   titlePanel(title = div(icon("graduation-cap"), 
                          strong("Fuzu Students Banding"), 
-                         style = "font-family: Cursive; font-size:24.5px", 
-                         shinyBS::bsButton("more_info", 
-                                           label = "", 
-                                           icon = icon("info", lib = "font-awesome"), 
-                                           style = "info", 
-                                           size = "extra-small"))),
-  
-  shinyBS::bsPopover(
-    id = "more_info",
-    title = HTML("<b>About</b>"),
-    content = HTML(more_info),
-    placement = "right",
-    trigger = "hover",
-    options = list(container = "body")
-  ),
+                         style = "font-family: Cursive; font-size:24.5px"),
+             windowTitle = "Fuzu Students Banding"),
   
   # sidebar with inputs
   sidebarLayout(
@@ -96,10 +82,22 @@ ui <- fluidPage(
     
     # main page
     mainPanel = mainPanel(
+      
+      
       width = 9,
+      
+      p(tags$b("DISCLAIMER:"),
+        "The training data was", tags$b(em("simulated")), "as described", 
+        tags$a(href = "https://corneliustanui.rbind.io/content/posts/Simulation_2024-09-12/", "here"), 
+        "and as such, the outcome does not reflect the reality."),
+      
+      p("© 2024", tags$a(href = "https://github.com/corneliustanui/FuzuStudentsBanding", "Cornelius Tanui")),
+      
+      hr(style = "border-top: 1px solid grey;"),
       
       # display the result
       textOutput("result")
+
     )
   )
 )
