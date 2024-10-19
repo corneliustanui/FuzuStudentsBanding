@@ -1,5 +1,6 @@
 # load UI globals
 source("./mains/globals.R") 
+more_info <- "This is machine learning application powered by a multinomial regression. The training data was simulated, and as such the outcome does not reflect the reality. © 2024 Cornelius Tanui"
 
 # define UI elements
 ui <- fluidPage(
@@ -7,7 +8,21 @@ ui <- fluidPage(
   # app title
   titlePanel(title = div(icon("graduation-cap"), 
                          strong("Fuzu Students Banding"), 
-                         style = "font-family: Cursive; font-size:24.5px")),
+                         style = "font-family: Cursive; font-size:24.5px", 
+                         shinyBS::bsButton("more_info", 
+                                           label = "", 
+                                           icon = icon("info", lib = "font-awesome"), 
+                                           style = "info", 
+                                           size = "extra-small"))),
+  
+  shinyBS::bsPopover(
+    id = "more_info",
+    title = HTML("<b>About</b>"),
+    content = HTML(more_info),
+    placement = "right",
+    trigger = "hover",
+    options = list(container = "body")
+  ),
   
   # sidebar with inputs
   sidebarLayout(
@@ -24,57 +39,39 @@ ui <- fluidPage(
       
       hr(style = "border-top: 1px solid #000000;"),
       
-      textInput(inputId = "first_name", 
-                label = "Enter your first name.", 
-                value = "", 
-                width = NULL, 
-                placeholder = "Enter first name"),
-      
-      textInput(inputId = "last_name", 
-                label = "Enter your last name.", 
-                value = "", 
-                width = NULL, 
-                placeholder = "Enter last name"),
-      
-      selectInput(inputId = "sex",
+      selectInput(inputId = "Gender",
                   label = "What is your sex?", 
                   choices = choices_sex,
                   selected = NULL),
       
-      selectInput(inputId = "geographical_location", 
+      selectInput(inputId = "GeographicalLocation", 
                   label = "Select your home county.", 
                   choices = choices_counties,
                   selected = NULL),
       
-      textInput(inputId = "university", 
-                label = "Which college/university have you been invited to?", 
-                value = "", 
-                width = NULL, 
-                placeholder = "Enter university name"),
-      
-      numericInput(inputId = "gross_monthly_family_income", 
+      numericInput(inputId = "GrossFamilyIncome", 
                    label = "What is your family's gross monthly income (KES)?", 
                    min = 0,
                    value = 0),
       
-      radioButtons(inputId = "orphan_vulnerable_child", 
+      radioButtons(inputId = "Orphans", 
                    label = "Are you an Orphan or a Vulnerable Child (OVC)?",
                    choices = choices_yes_no,
                    selected = NULL,
                    inline = TRUE),
       
-      radioButtons(inputId = "living_with_disability",
+      radioButtons(inputId = "Disability",
                    label = "Are you a Person Living with Disability (PLWD)?", 
                    choices = choices_yes_no,
                    selected = NULL,
                    inline = TRUE),
       
-      numericInput(inputId = "number_of_dependents", 
+      numericInput(inputId = "NumberOfDependents", 
                    label = "How many dependents are in your household?", 
                    min = 0,
                    value = 0),
       
-      sliderInput(inputId = "poverty_probability_index", 
+      sliderInput(inputId = "PovertyProbabilityIndex", 
                   label = "On a scale of 1 to 100, what do you believe is your household poverty index? The smaller the value, the less likely it is that you are from a humble background.", 
                   value = 50,
                   min = 0,
@@ -87,7 +84,7 @@ ui <- fluidPage(
                    value = 0),
       
       shinyWidgets::actionBttn(inputId = "generate_bands",
-                               label = "Generate Bands",
+                               label = "Generate Band",
                                icon = NULL,
                                style = "unite",
                                color = "primary",
@@ -101,9 +98,7 @@ ui <- fluidPage(
     mainPanel = mainPanel(
       width = 9,
       
-      # display entered data
-      tableOutput("new_student_data"),
-      
+      # display the result
       textOutput("result")
     )
   )
