@@ -39,6 +39,9 @@ multinom_recipe <-
   # specify the outcome variable
   recipes::recipe(Bands ~ ., data = train_data) |>
   
+  # coerce unknown or new levels not already in training data to NA
+  recipes::step_unknown(GeographicalLocation) |>
+  
   # specify predictors to be one-hot-encoded
   recipes::step_dummy(GeographicalLocation, Gender, Orphans, Disability) |>
   
