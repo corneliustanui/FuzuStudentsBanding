@@ -8,7 +8,6 @@ library(tidyverse)  # data processing packages
 library(tidymodels) # model definition packages
 library(parsnip)    # model definition functions
 library(glmnet)     # model processing engine
-library(shinyBS)    # for more info tooltip
 
 # load UI definitions
 source("./ui.R")
