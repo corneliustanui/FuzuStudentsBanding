@@ -42,15 +42,11 @@ server <- function(input, output, session){
       
       # generate bands
       new_student_band <- predict(object = multinom_fit,
-                                                     new_data = new_student_data(),
-                                                     type = "class")$.pred_class
+                                  new_data = new_student_data(),
+                                  type = "class")$.pred_class
 
-      
       # send output to UI
       output$result <- renderText(paste("Hi there, you are in band: ", new_student_band))
-
     }
-    
   )
-
 }
