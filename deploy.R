@@ -25,9 +25,7 @@ setAccountInfo(name = error_on_missing_name("SHINY_ACC_NAME"),
                secret = error_on_missing_name("SECRET"))
 
 # Deploy the application.
-deployApp(appFiles = c(#'renv.lock',
-                       
-                       'mains/',
+deployApp(appFiles = c('mains/',
 
                        'ui.R', 
                        'server.R',

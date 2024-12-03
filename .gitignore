@@ -6,3 +6,4 @@
 data/
 rsconnect/
 renv/
+renv.lock
