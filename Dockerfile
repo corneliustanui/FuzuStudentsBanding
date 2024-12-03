@@ -9,7 +9,7 @@ WORKDIR /FUZU
 
 # copy files from remote repo(GitHub) work dir to image ork dir
 # to copy all files at once (keeping folder structure), use "COPY . .""
-COPY ./renv.lock /FUZU/renv.lock
+# COPY ./renv.lock /FUZU/renv.lock
 
 COPY ./mains /FUZU/mains/
 
