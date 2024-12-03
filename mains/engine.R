@@ -1,9 +1,18 @@
+# Project:     Fuzu Students Banding
+# Author:      Cornelius Tanui (kiplimocornelius@gmail.com)
+# Data source: Simulation
+# Database:    N/A
+# File name:   engine.R
+# Purpose      App Engine Definition
+# Date:        30 Nov 2024
+# Version:     1
 
 ## load packages ----
 library(tidyverse)  # data processing packages
 library(tidymodels) # model definition packages
 library(parsnip)    # model definition functions
 library(glmnet)     # model processing engine
+library(workflows)  # model definition functions
 
 ## load data ----
 simulated_data <- readRDS(here::here("./data/simulated_data.rds"))
@@ -19,7 +28,7 @@ train_data <- rsample::training(data_split)
 # 25% of records
 test_data  <- rsample::testing(data_split)
 
-## hyper-parameter tuning  ----
+## hyper-parameter tuning ----
 # define model non-tuned model
 multinom_reg_glmnet_spec_not_tuned <-
   parsnip::multinom_reg(penalty = tune(), mixture = tune()) |> # to be tuned
@@ -45,11 +54,11 @@ multinom_recipe <-
   # specify predictors to be one-hot-encoded
   recipes::step_dummy(GeographicalLocation, Gender, Orphans, Disability) |>
   
-  # center all normally distributed predictors  
+  # center all normally distributed predictors
   recipes::step_center(GrossFamilyIncome, PovertyProbabilityIndex, 
                        NumberOfDependents, ProgramCostsKES) |>
   
-  # scale all normally distributed predictors 
+  # scale all normally distributed predictors
   recipes::step_scale(GrossFamilyIncome, PovertyProbabilityIndex, 
                       NumberOfDependents, ProgramCostsKES) |>
   
@@ -73,7 +82,7 @@ multinom_tuned <- tune::tune_grid(
 # select the best performing model
 (best_parameter_values <- tune::select_best(multinom_tuned, metric = "accuracy"))
 
-## define model tuned model   ----
+## define model tuned model ----
 multinom_reg_glmnet_spec_tuned <-
   parsnip::multinom_reg(penalty = best_parameter_values$penalty, 
                         mixture = best_parameter_values$mixture) |>
@@ -91,7 +100,7 @@ multinom_fit <-
   multinom_workflow |>
   parsnip::fit(data = train_data)
 
-## model performance diagnostics   ----
+## model performance diagnostics ----
 # create new data (can be completely new or use training data without response variable)
 predictors_data <- test_data |> dplyr::select(-Bands)
 
@@ -103,7 +112,7 @@ bands_data$Bands_pred <- bands_data$Bands_pred$.pred_class
 
 bands_data <- bands_data |> dplyr::select(Bands, Bands_pred)
 
-## measure performance   ----
+## measure performance ----
 # 1) confusion matrix
 yardstick::conf_mat(data = bands_data, truth = Bands, estimate = Bands_pred)
 

@@ -2,6 +2,7 @@
 .Rhistory
 .Rproj.user/
 *.Rproj
+.Renviron
 data/
 rsconnect/
-.Renviron
+renv/

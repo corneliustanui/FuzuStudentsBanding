@@ -1,5 +1,14 @@
+# Project:     Fuzu Students Banding
+# Author:      Cornelius Tanui (kiplimocornelius@gmail.com)
+# Data source: Simulation
+# Database:    N/A
+# File name:   server.R
+# Purpose      Server Definition
+# Date:        30 Nov 2024
+# Version:     1
+
 # load engine
-multinom_fit <- readRDS("./mains/multinomial_regression_classifier.rds")
+multinom_fit <<- readRDS("mains/multinomial_regression_classifier.rds")
 
 # define server side processing
 server <- function(input, output, session){
@@ -39,6 +48,10 @@ server <- function(input, output, session){
     eventExpr = input$generate_bands, 
     
     handlerExpr = {
+
+      # it is important to have these packages here
+      require(glmnet)
+      require(workflows)
       
       # generate bands
       new_student_band <- predict(object = multinom_fit,
