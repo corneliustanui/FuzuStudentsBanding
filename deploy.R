@@ -1,3 +1,12 @@
+# Project:     Fuzu Students Banding
+# Author:      Cornelius Tanui (kiplimocornelius@gmail.com)
+# Data source: Simulation
+# Database:    N/A
+# File name:   deploy.R
+# Purpose      Deployment Definition
+# Date:        30 Nov 2024
+# Version:     1
+
 library(rsconnect)
 
 # a function to stop the script when one of the variables cannot be found
@@ -16,7 +25,9 @@ setAccountInfo(name = error_on_missing_name("SHINY_ACC_NAME"),
                secret = error_on_missing_name("SECRET"))
 
 # Deploy the application.
-deployApp(appFiles = c('./mains/',
+deployApp(appFiles = c('renv.lock',
+                       
+                       'mains/',
 
                        'ui.R', 
                        'server.R',

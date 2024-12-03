@@ -1,5 +1,14 @@
+# Project:     Fuzu Students Banding
+# Author:      Cornelius Tanui (kiplimocornelius@gmail.com)
+# Data source: Simulation
+# Database:    N/A
+# File name:   ui.R
+# Purpose      UI Definition
+# Date:        30 Nov 2024
+# Version:     1
+
 # load UI globals
-source("./mains/globals.R") 
+source("mains/globals.R") 
 
 # define UI elements
 ui <- fluidPage(
@@ -82,8 +91,7 @@ ui <- fluidPage(
     
     # main page
     mainPanel = mainPanel(
-      
-      
+
       width = 9,
       
       p(tags$b("DISCLAIMER:"),
@@ -97,7 +105,6 @@ ui <- fluidPage(
       
       # display the result
       textOutput("result")
-
     )
   )
 )

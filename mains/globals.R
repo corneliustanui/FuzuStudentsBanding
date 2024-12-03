@@ -1,3 +1,11 @@
+# Project:     Fuzu Students Banding
+# Author:      Cornelius Tanui (kiplimocornelius@gmail.com)
+# Data source: Simulation
+# Database:    N/A
+# File name:   global.R
+# Purpose      Global Variables Definition
+# Date:        30 Nov 2024
+# Version:     1
 
 # define choices
 choices_sex <-  factor(c("None selected" = "", "Male" = 1, "Female" = 2, "Intersex" = 3))
