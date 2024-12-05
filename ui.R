@@ -28,7 +28,7 @@ ui <- fluidPage(
       h4(style = "text-align:center", strong("WELCOME!")),
       
       p(style = "text-align:center",
-        "Are you a university student in Kenya, and would you like to know where you lie in terms of banding for the award of Governmnet support towards your tuition and stay in school?", 
+        "Are you a university student in Kenya, and would you like to know where you lie in terms of banding for the award of Government support towards your tuition and stay in school?", 
         strong("Fuzu Students Banding"), "does exacty that! Enter the details below and click", 
         strong("Generate Band")),
       
